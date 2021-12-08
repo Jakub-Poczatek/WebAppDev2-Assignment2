@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
   
   const UserSchema = new Schema({
     username: { type: String, unique: true, required: true},
-    password: {type: String, required: true },
-    favourites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}]
+    password: {type: String , required: true},
+    favourites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies', unique: true}]
   });
 
   UserSchema.statics.findByUserName = function (username) {
@@ -40,6 +40,6 @@ const Schema = mongoose.Schema;
     } else {
         return next();
     }
-});
+  });
 
 export default mongoose.model('User', UserSchema);
