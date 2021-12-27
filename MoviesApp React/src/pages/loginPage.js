@@ -1,76 +1,38 @@
-import { TextField, makeStyles } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { AuthContext } from "../authentication/authContext";
+import { AuthContext } from '../contexts/authContext';
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        marginTop: theme.spacing(2),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      },
-    textField: {
-        width: "20ch",
-    },
-}))
-
-const LoginPage = (props) => {
-  const context = useContext(AuthContext);
-  const classes = useStyles();
-  let username = "";
-  let password = "";
+const LoginPage = props => {
+  const context = useContext(AuthContext)
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   const login = () => {
-    console.log("Loggin in");
-    context.authenticate(username, password);
+    context.authenticate(userName, password);
   };
 
-  const changeUsername = (value) => {
-    username = value;
-  }
-
-  const changePassword = (value) => {
-    password = value;
-  }
-
-  // Set 'from' to the path where browser is redirected after a successful login.
+  // Set 'from' to path where browser is redirected after a successful login.
   // Either / or the protected path user tried to access.
   const { from } = props.location.state || { from: { pathname: "/" } };
 
-  return context.isAuthenticated ? (
-    <Redirect to={from} />
-  ) : (
+  if (context.isAuthenticated === true) {
+    return <Redirect to={from} />;
+  }
+  return (
     <>
       <h2>Login page</h2>
       <p>You must log in to view the protected pages </p>
-      <TextField
-          className={classes.textField}
-          variant="outlined"
-          margin="normal"
-          required
-          id="username"
-          label="Username"
-          name="username"
-          size="small"
-          autoFocus
-          onChange={(e) => changeUsername(e.target.value)}
-        />
-        <TextField
-          className={classes.textField}
-          variant="outlined"
-          margin="normal"
-          required
-          id="password"
-          label="Password"
-          name="password"
-          size="small"
-          autoFocus
-          onChange={(e) => changePassword(e.target.value)}
-        />
-        <br/>
+      <input id="username" placeholder="user name" onChange={e => {
+        setUserName(e.target.value);
+      }}></input><br />
+      <input id="password" type="password" placeholder="password" onChange={e => {
+        setPassword(e.target.value);
+      }}></input><br />
       {/* Login web form  */}
-      <button onClick={login}>Submit</button>
+      <button onClick={login}>Log in</button>
+      <p>Not Registered?
+      <Link to="/signup">Sign Up!</Link></p>
     </>
   );
 };
