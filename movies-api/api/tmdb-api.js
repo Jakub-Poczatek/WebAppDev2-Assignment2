@@ -10,6 +10,6 @@ export const getUpcomingMovies = () => {
         return response.json();
     })
         .catch((error) => {
-            throw error
+            throw error;
         });
 };
