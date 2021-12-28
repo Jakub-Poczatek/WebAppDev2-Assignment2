@@ -6,6 +6,7 @@ import moviesRouter from './api/movies';
 import genresRouter from "./api/genres";
 import usersRouter from './api/users';
 import regionalsRouter from "./api/regionals";
+import showsRouter from "./api/shows";
 import passport from "./authenticate";
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use('/api/movies', passport.authenticate("jwt", {session: false}), moviesRou
 app.use("/api/genres", genresRouter);
 app.use('/api/users', usersRouter);
 app.use("/api/regionals", regionalsRouter);
+app.use("/api/shows", showsRouter);
 app.use(errHandler);
 
 app.listen(port, () => {

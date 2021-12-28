@@ -16,6 +16,14 @@ router.get('/', asyncHandler(async (req, res) => {
     res.status(200).json(movies);
 }));
 
+
+router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {
+    let { page = 1} = req.query; // destructure page and limit and set default values
+    page = +page; //trick to convert to numeric (req.query will contain string values)
+    const upcomingMovies = await getUpcomingMovies(page);
+    res.status(200).json(upcomingMovies);
+}));
+
 router.get('/:id', asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id);
     //const movie = await movieModel.findByMovieDBId(id);
@@ -49,22 +57,6 @@ router.get('/:id/reviews', asyncHandler(async (req, res) => {
     }
 }));
 
-/*
-// Get movie reviews
-router.get('/:id/reviews', (req, res) => {
-    const id = parseInt(req.params.id);
-    // find reviews in list
-    if (movieReviews.id == id) {
-        res.status(200).json(movieReviews);
-    } else {
-        res.status(404).json({
-            message: 'The resource you requested could not be found.',
-            status_code: 404
-        });
-    }
-});
-*/
-
 //Post a movie review
 router.post('/:id/reviews', (req, res) => {
     const id = parseInt(req.params.id);
@@ -82,12 +74,5 @@ router.post('/:id/reviews', (req, res) => {
         });
     }
 });
-
-router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {
-    let { page = 1} = req.query; // destructure page and limit and set default values
-    page = +page; //trick to convert to numeric (req.query will contain string values)
-    const upcomingMovies = await getUpcomingMovies(page);
-    res.status(200).json(upcomingMovies);
-}));
 
 export default router;
