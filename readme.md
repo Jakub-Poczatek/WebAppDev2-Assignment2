@@ -8,11 +8,28 @@ Movie App powered by React using a Node.js API.
 The Movie App supports the following integration. 
 
 Movies
-=============== 
-The movies endpoint was changed from using the TMDB API to using the Node.js API with sample data. 
+====== 
+All movie related API calls have now been proxied to use the Node API as a middleman to TMDB. These calls include:
+    Discover Movies 
+    Upcoming Movies
+    Movie Details
+    Movie Genres
+    Movie Images
+    Movie Reviews
+    Countries 
 
-Favourites are saved permanently 
+Shows 
+=====
+All show related API calls have now been proxied to use the Node API as a middleman to TMDB. These calls include:
+    Popular Shows
+    Show Details
+    Show Genres
+    Show Images
+    Show Reviews
+    Languages 
 
-Authentication
-==============
-    Authentication 
+Movie Favourites
+================
+Movie favourites are now permanently saved to the MongoDB once added. Even after restarting the server the favourites still persist. 
+
+ 
