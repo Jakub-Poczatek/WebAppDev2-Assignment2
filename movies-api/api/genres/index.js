@@ -1,7 +1,8 @@
 import express from "express";
-//import {genres} from "./genresData";
 import Genre from "./genreModel";
-//import asyncHandler from "express-async-handler";
+import {
+    getMovieGenres
+} from "../tmdb-api";
 
 const router = express.Router();
 
@@ -10,8 +11,8 @@ const router = express.Router();
 });
 */
 
-router.get("/", async(req, res) => {
-    const genres = await Genre.find();
+router.get("/movies", async(req, res) => {
+    const genres = await getMovieGenres();
     res.status(200).json(genres);
 });
 
