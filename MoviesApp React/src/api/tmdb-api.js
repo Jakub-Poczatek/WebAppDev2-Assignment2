@@ -40,61 +40,42 @@ export const getMovieGenres = async () => {
     ).then(res => res.json());
 };
 
-export const getCountries = async () => {
-  return fetch(
-    "https://api.themoviedb.org/3/configuration/countries?api_key=" +
-    process.env.REACT_APP_TMDB_KEY
-  ).then( (response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  })
-  .catch((error) => {
-    throw error
-  });
-};
-
-export const getLanguages = async () => {
-  return fetch(
-    "https://api.themoviedb.org/3/configuration/languages?api_key=" +
-    process.env.REACT_APP_TMDB_KEY
-  ).then( (response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  })
-  .catch((error) => {
-    throw error
-  });
-};
-
 export const getMovieImages = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
-  ).then( (response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
+    //`https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `/api/movies/${id}/images`, 
+    {headers: {
+      "Authorization": window.localStorage.getItem("token")
     }
-    return response.json();
-
-  })
-  .catch((error) => {
-    throw error
-  });
+  }
+  ).then(res => res.json());
 };
 
 export const getMovieReviews = (id) => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
-  )
-  .then ((res) => res.json())
-  .then ((json) => {
-    return json.results;
-  });
+    //`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `/api/movies/${id}/reviews`, 
+    {headers: {
+      "Authorization": window.localStorage.getItem("token")
+    }
+  }
+  ).then(res => res.json());
+};
+
+export const getCountries = async () => {
+  return fetch(
+    //"https://api.themoviedb.org/3/configuration/countries?api_key=" + process.env.REACT_APP_TMDB_KEY
+    `/api/regionals/countries`
+  ).then(res => res.json());
+};
+
+export const getLanguages = async () => {
+  return fetch(
+    //"https://api.themoviedb.org/3/configuration/languages?api_key=" + process.env.REACT_APP_TMDB_KEY
+    `/api/regionals/languages`
+  ).then(res => res.json());
 };
 
 export const getShows = () => {

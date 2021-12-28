@@ -55,3 +55,55 @@ export const getMovieGenres = () => {
             throw error;
         });
 };
+
+export const getMovieImages = (id) => {
+    return fetch(
+        `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.TMDB_KEY}`
+    ).then((response) => {
+        if (!response.ok) {
+            throw new Error(response.json().message);
+        }
+        return response.json();
+    })
+        .catch((error) => {
+            throw error;
+        });
+};
+
+export const getMovieReviews = (id) => {
+    return fetch(
+        `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_KEY}`
+    ).then((res) => res.json())
+    .then((json) => {
+      return json.results;
+    });
+};
+
+export const getCountries = () => {
+    return fetch(
+        `https://api.themoviedb.org/3/configuration/countries?api_key=${process.env.TMDB_KEY}`
+    ).then((response) => {
+        if (!response.ok) {
+            throw new Error(response.json().message);
+        }
+        return response.json();
+    })
+        .catch((error) => {
+            throw error;
+        });
+};
+
+export const getLanguages = () => {
+    return fetch(
+        `https://api.themoviedb.org/3/configuration/languages?api_key=${process.env.TMDB_KEY}`
+    ).then((response) => {
+        if (!response.ok) {
+            throw new Error(response.json().message);
+        }
+        return response.json();
+    })
+        .catch((error) => {
+            throw error;
+        });
+};
+
