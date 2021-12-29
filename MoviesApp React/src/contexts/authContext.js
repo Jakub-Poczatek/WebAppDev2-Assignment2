@@ -31,8 +31,12 @@ const AuthContextProvider = (props) => {
     addFavouriteMovie(userName, movie.id);
   };
 
-  const removeFromFavourites = (movie) => {
-    setFavorites([...favorites, movie]);
+  const removeFromFavourites = (movie) => {    
+    if(favorites.includes(movie)){
+    const index = favorites.indexOf(movie);
+    favorites.splice(index, 1);
+    }
+    setFavorites([...favorites]);    
     removeFavouriteMovie(userName, movie.id);
   }
 
