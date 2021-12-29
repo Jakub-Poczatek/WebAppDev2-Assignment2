@@ -1,5 +1,5 @@
 export const login = (username, password) => {
-    return fetch(`api/users`, {
+    return fetch(`/api/users`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -9,7 +9,8 @@ export const login = (username, password) => {
 };
 
 export const signup = (username, password) => {
-    return fetch(`api/users?action=register`, {
+    console.log("Username: " + username + "\nPassword: " + password)
+    return fetch(`/api/users?action=register`, {
         headers: {
             "Content-Type": "application/json"
         },
