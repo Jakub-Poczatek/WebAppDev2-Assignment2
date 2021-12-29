@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { login, signup, addFavouriteMovie, getFavouriteMovies } from "../api/movie-api";
+import { login, signup, addFavouriteMovie, getFavouriteMovies, removeFavouriteMovie } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
 
@@ -27,9 +27,14 @@ const AuthContextProvider = (props) => {
   };
 
   const addToFavorites = (movie) => {
-      setFavorites([...favorites, movie])
-      addFavouriteMovie(userName, movie.id);
+    setFavorites([...favorites, movie])
+    addFavouriteMovie(userName, movie.id);
   };
+
+  const removeFromFavourites = (movie) => {
+    setFavorites([...favorites, movie]);
+    removeFavouriteMovie(userName, movie.id);
+  }
 
   const register = async (username, password) => {
     const result = await signup(username, password);
@@ -50,6 +55,7 @@ const AuthContextProvider = (props) => {
         signout,
         userName,
         addToFavorites,
+        removeFromFavourites,
         favorites
       }}
     >

@@ -19,7 +19,7 @@ export const signup = (username, password) => {
 };
 
 export const addFavouriteMovie = (userName, id) => {
-    return fetch(`api/users/${userName}/favourites`, {
+    return fetch(`/api/users/${userName}/favourites`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -33,8 +33,8 @@ export const getFavouriteMovies = (username) => {
         `/api/users/${username}/favourites`
     ).then((response) => {
         if(!response.ok){
-            //throw new Error(response.json().message);
-            console.log("OOOOOPPPSIE")
+            throw new Error(response.json().message);
+            //console.log("OOOOOPPPSIE")
         }
         return response.json();
     })
@@ -42,3 +42,14 @@ export const getFavouriteMovies = (username) => {
         throw error;
     });
 }
+
+export const removeFavouriteMovie = (userName, id) => {
+    console.log("I am running");
+    return fetch(`/api/users/${userName}/favourites`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "delete",
+        body: JSON.stringify({username: userName, id: id})
+    }).then(res => res.json());
+};
