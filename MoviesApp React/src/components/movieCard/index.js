@@ -17,6 +17,7 @@ import img from '../../images/film-poster-placeholder.png'
 import {Link} from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
+import { AuthContext } from "../../contexts/authContext";
 
 const useStyles = makeStyles({
     card: {maxWidth: 345},
@@ -28,13 +29,13 @@ const useStyles = makeStyles({
 
 export default function MovieCard({ movie, action }) {
   const classes = useStyles();
-  const { favorites, addToFavorites } = useContext(MoviesContext);
+  const { favorites, addToFavorites } = useContext(AuthContext);
   const { wishlist, addToWishlist} = useContext(MoviesContext);
 
-  if (favorites.find((id) => id === movie.id)) {
+  if(favorites.find(element => element.id === movie.id)){
     movie.favorite = true;
   } else {
-    movie.favorite = false
+    movie.favorite = false;
   }
 
   if (wishlist.find((id) => id === movie.id)){
