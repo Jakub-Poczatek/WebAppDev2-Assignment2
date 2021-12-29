@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 export default function MovieCard({ movie, action }) {
   const classes = useStyles();
   const { favorites, addToFavorites } = useContext(AuthContext);
-  const { wishlist, addToWishlist} = useContext(MoviesContext);
+  const { wishlist, addToWishlist} = useContext(AuthContext);
 
   if(favorites.find(element => element.id === movie.id)){
     movie.favorite = true;
@@ -38,7 +38,7 @@ export default function MovieCard({ movie, action }) {
     movie.favorite = false;
   }
 
-  if (wishlist.find((id) => id === movie.id)){
+  if (wishlist.find((element) => element.id === movie.id)){
     movie.wishlist = true;
   } else {
     movie.wishlist = false;

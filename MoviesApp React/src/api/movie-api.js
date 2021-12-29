@@ -18,6 +18,10 @@ export const signup = (username, password) => {
     }).then(res => res.json());
 };
 
+//////////////
+//Favourites//
+//////////////
+
 export const addFavouriteMovie = (userName, id) => {
     return fetch(`/api/users/${userName}/favourites`, {
         headers: {
@@ -34,7 +38,6 @@ export const getFavouriteMovies = (username) => {
     ).then((response) => {
         if(!response.ok){
             throw new Error(response.json().message);
-            //console.log("OOOOOPPPSIE")
         }
         return response.json();
     })
@@ -44,8 +47,83 @@ export const getFavouriteMovies = (username) => {
 }
 
 export const removeFavouriteMovie = (userName, id) => {
-    console.log("I am running");
     return fetch(`/api/users/${userName}/favourites`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "delete",
+        body: JSON.stringify({username: userName, id: id})
+    }).then(res => res.json());
+};
+
+////////////
+//Wishlist//
+////////////
+
+export const addWishlistMovie = (userName, id) => {
+    return fetch(`/api/users/${userName}/wishlist`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "post",
+        body: JSON.stringify({username: userName, id: id})
+    }).then(res => res.json());
+};
+
+export const getWishlistMovies = (username) => {
+    return fetch(
+        `/api/users/${username}/wishlist`
+    ).then((response) => {
+        if(!response.ok){
+            throw new Error(response.json().message);
+        }
+        return response.json();
+    })
+    .catch((error) => {
+        throw error;
+    });
+}
+
+export const removeWishlistMovie = (userName, id) => {
+    return fetch(`/api/users/${userName}/wishlist`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "delete",
+        body: JSON.stringify({username: userName, id: id})
+    }).then(res => res.json());
+};
+
+//////////////////
+//ShowFavourites//
+//////////////////
+
+export const addShowFavouriteMovie = (userName, id) => {
+    return fetch(`/api/users/${userName}/showFavourites`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "post",
+        body: JSON.stringify({username: userName, id: id})
+    }).then(res => res.json());
+};
+
+export const getShowFavouriteMovies = (username) => {
+    return fetch(
+        `/api/users/${username}/showFavourites`
+    ).then((response) => {
+        if(!response.ok){
+            throw new Error(response.json().message);
+        }
+        return response.json();
+    })
+    .catch((error) => {
+        throw error;
+    });
+}
+
+export const removeShowFavouriteMovie = (userName, id) => {
+    return fetch(`/api/users/${userName}/showFavourites`, {
         headers: {
             "Content-Type": "application/json"
         },

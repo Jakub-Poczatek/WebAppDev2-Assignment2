@@ -47,17 +47,17 @@ const App = () => {
       {""}
       <Switch>
         <Route exact path = "/login" component={LoginPage} />
-        <Route exact path = "/movies/wishlist" component={WishlistPage} />
+        <PrivateRoute exact path = "/movies/wishlist" component={WishlistPage} />
         <PrivateRoute exact path = "/tv/reviews/form" component={AddShowReviewPage} />
-        <Route exact path = "/tv/reviews/:id" component={ShowReviewPage} />
-        <Route exact path = "/tv/popular" component={ShowListPage} />
-        <Route exact path = "/tv/popular/:id" component = {ShowDetailsPage} />
-        <Route exact path = "/tv/favorites" component = {FavoriteShowsPage} />
+        <PrivateRoute exact path = "/tv/reviews/:id" component={ShowReviewPage} />
+        <PrivateRoute exact path = "/tv/popular" component={ShowListPage} />
+        <PrivateRoute exact path = "/tv/popular/:id" component = {ShowDetailsPage} />
+        <PrivateRoute exact path = "/tv/favorites" component = {FavoriteShowsPage} />
         <PrivateRoute exact path = "/reviews/form" component = {addMovieReviewPage} />
-        <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
-        <Route path="/movies/reviews/:id" component={MovieReviewPage}/>
+        <PrivateRoute exact path="/movies/upcoming" component={UpcomingMoviesPage} />
+        <PrivateRoute path="/movies/reviews/:id" component={MovieReviewPage}/>
         <PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} />
-        <Route path="/movies/:id" component={MoviePage} />
+        <PrivateRoute path="/movies/:id" component={MoviePage} />
         <PrivateRoute exact path="/" component={HomePage} />
         <Redirect from="*" to="/" />
       </Switch>

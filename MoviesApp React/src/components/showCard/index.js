@@ -16,6 +16,7 @@ import Avatar from "@material-ui/core/Avatar";
 import img from '../../images/film-poster-placeholder.png';
 import {Link} from "react-router-dom";
 import { MoviesContext } from "../../contexts/moviesContext";
+import { AuthContext } from "../../contexts/authContext";
 
 const useStyles = makeStyles({
   card: {maxWidth: 345},
@@ -27,9 +28,9 @@ const useStyles = makeStyles({
 
 export default function ShowCard({ show, action }) {
   const classes = useStyles();
-  const { showFavorites, addToShowFavorites } = useContext(MoviesContext);
+  const { showFavorites, addToShowFavorites } = useContext(AuthContext);
 
-  if (showFavorites.find((id) => id === show.id)) {
+  if (showFavorites.find((element) => element.id === show.id)) {
     show.favorite = true;
   } else {
     show.favorite = false

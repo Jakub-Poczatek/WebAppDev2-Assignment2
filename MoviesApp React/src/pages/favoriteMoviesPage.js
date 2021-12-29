@@ -9,27 +9,8 @@ import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
 
 const FavoriteMoviesPage = () => {
-  //const {favorites: movieIds } = useContext(MoviesContext);
   const {favorites} = useContext(AuthContext);
-/*
-  // Create an array of queries and run in parallel.
-  const favoriteMovieQueries = useQueries(
-    movieIds.map((movieId) => {
-      return {
-        queryKey: ["movie", { id: movieId }],
-        queryFn: getMovie, 
-      };
-    })
-  );
-  // Check if any of the parallel queries is still loading.
-  const isLoading = favoriteMovieQueries.find((m) => m.isLoading === true);
-    
-  if (isLoading) {
-    return <Spinner />;
-  }
-  const movies = favoriteMovieQueries.map((q) => q.data);
-  //const toDo = () => true;
-*/
+  
   return (
     <PageTemplate
       title="Favourite Movies"

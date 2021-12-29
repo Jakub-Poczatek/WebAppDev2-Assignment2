@@ -1,5 +1,9 @@
 import React, { useState, createContext } from "react";
-import { login, signup, addFavouriteMovie, getFavouriteMovies, removeFavouriteMovie } from "../api/movie-api";
+import { login, signup, 
+  addFavouriteMovie, getFavouriteMovies, removeFavouriteMovie, 
+  addWishlistMovie, getWishlistMovies, removeWishlistMovie,
+  addShowFavouriteMovie, getShowFavouriteMovies, removeShowFavouriteMovie 
+} from "../api/movie-api";
 
 export const AuthContext = createContext(null);
 
@@ -9,6 +13,8 @@ const AuthContextProvider = (props) => {
   const [authToken, setAuthToken] = useState(existingToken);
   const [userName, setUserName] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [showFavorites, setShowFavorites] = useState([]);
 
   //Function to put JWT token in local storage.
   const setToken = (data) => {
@@ -23,12 +29,16 @@ const AuthContextProvider = (props) => {
       setIsAuthenticated(true);
       setUserName(username);
       setFavorites(await getFavouriteMovies(username));
+      setWishlist(await getWishlistMovies(username));
+      setShowFavorites(await getShowFavouriteMovies(username));
     }
   };
 
   const addToFavorites = (movie) => {
+    if(!favorites.includes(movie)){
     setFavorites([...favorites, movie])
     addFavouriteMovie(userName, movie.id);
+    }
   };
 
   const removeFromFavourites = (movie) => {    
@@ -38,6 +48,38 @@ const AuthContextProvider = (props) => {
     }
     setFavorites([...favorites]);    
     removeFavouriteMovie(userName, movie.id);
+  }
+
+  const addToWishlist = (movie) => {
+    if(!wishlist.includes(movie)){
+    setWishlist([...wishlist, movie])
+    addWishlistMovie(userName, movie.id);
+    }
+  };
+
+  const removeFromWishlist = (movie) => {    
+    if(wishlist.includes(movie)){
+    const index = wishlist.indexOf(movie);
+    wishlist.splice(index, 1);
+    }
+    setWishlist([...wishlist]);    
+    removeWishlistMovie(userName, movie.id);
+  }
+
+  const addToShowFavorites = (show) => {
+    if(!showFavorites.includes(show)){
+    setShowFavorites([...showFavorites, show])
+    addShowFavouriteMovie(userName, show.id);
+    }
+  };
+
+  const removeFromShowFavourites = (show) => {    
+    if(showFavorites.includes(show)){
+    const index = showFavorites.indexOf(show);
+    showFavorites.splice(index, 1);
+    }
+    setShowFavorites([...showFavorites]);    
+    removeShowFavouriteMovie(userName, show.id);
   }
 
   const register = async (username, password) => {
@@ -60,7 +102,13 @@ const AuthContextProvider = (props) => {
         userName,
         addToFavorites,
         removeFromFavourites,
-        favorites
+        favorites,
+        addToWishlist,
+        removeFromWishlist,
+        wishlist,
+        addToShowFavorites,
+        removeFromShowFavourites,
+        showFavorites
       }}
     >
       {props.children}

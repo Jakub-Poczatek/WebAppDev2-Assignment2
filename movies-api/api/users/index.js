@@ -3,7 +3,7 @@ import User from './userModel';
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 //import movieModel from "../movies/movieModel";
-import {getMovie} from "../tmdb-api";
+import {getMovie, getShow} from "../tmdb-api";
 
 const router = express.Router(); // eslint-disable-line
 
@@ -55,6 +55,10 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+//////////////
+//Favourites//
+//////////////
+
 //Add a favourite. No Error Handling Yet. Can add duplicates too!
 router.post('/:userName/favourites', asyncHandler(async (req, res) => {
     const newFavourite = req.body.id;
@@ -92,7 +96,95 @@ router.post('/:userName/favourites', asyncHandler(async (req, res) => {
       await user.save(); 
       res.status(201).json(user);
     } else {
-      res.status(404).json({ code: 404, msg: 'Movie is already a favourite' });
+      res.status(404).json({ code: 404, msg: 'Movie is not in favourites' });
+    }
+  }));
+
+  ////////////
+  //Wishlist//
+  ////////////
+
+  router.post('/:userName/wishlist', asyncHandler(async (req, res) => {
+    const newWish = req.body.id;
+    const userName = req.params.userName;
+    //const movie = await movieModel.findByMovieDBId(newFavourite);
+    //const movie = await getMovie(newFavourite);
+    //console.info("movie: " + movie);
+    const user = await User.findByUserName(userName);
+    if(user.wishlist.includes(newWish)){
+      res.status(404).json({ code: 404, msg: 'Movie is already in wishlist' });
+    } else {
+      await user.wishlist.push(newWish);
+      await user.save(); 
+      res.status(201).json(user); }
+  }));
+
+  router.get('/:userName/wishlist', asyncHandler( async (req, res) => {
+    const userName = req.params.userName;
+    //const user = await User.findByUserName(userName).populate('favourites');
+    const user = await User.findByUserName(userName);
+    const userWishlist = [];
+    for(let i = 0; i < user.wishlist.length; i++){
+      userWishlist[i] = await getMovie(user.wishlist[i]);
+    }
+    res.status(200).json(userWishlist);
+  }));
+
+  router.delete('/:userName/wishlist', asyncHandler(async (req, res) => {
+    const wish = req.body.id;
+    const userName = req.params.userName;
+    const user = await User.findByUserName(userName);
+    if(user.wishlist.includes(wish)){
+      const index = user.wishlist.indexOf(wish);
+      await user.wishlist.splice(index, 1);
+      await user.save(); 
+      res.status(201).json(user);
+    } else {
+      res.status(404).json({ code: 404, msg: 'Movie is not in wishlist' });
+    }
+  }));
+
+  //////////////////
+  //ShowFavourites//
+  //////////////////
+
+  router.post('/:userName/showFavourites', asyncHandler(async (req, res) => {
+    const newFavourite = req.body.id;
+    const userName = req.params.userName;
+    //const movie = await movieModel.findByMovieDBId(newFavourite);
+    //const movie = await getMovie(newFavourite);
+    //console.info("movie: " + movie);
+    const user = await User.findByUserName(userName);
+    if(user.showFavourites.includes(newFavourite)){
+      res.status(404).json({ code: 404, msg: 'Show is already a favourite' });
+    } else {
+      await user.showFavourites.push(newFavourite);
+      await user.save(); 
+      res.status(201).json(user); }
+  }));
+
+  router.get('/:userName/showFavourites', asyncHandler( async (req, res) => {
+    const userName = req.params.userName;
+    //const user = await User.findByUserName(userName).populate('favourites');
+    const user = await User.findByUserName(userName);
+    const userFavourites = [];
+    for(let i = 0; i < user.showFavourites.length; i++){
+      userFavourites[i] = await getShow(user.showFavourites[i]);
+    }
+    res.status(200).json(userFavourites);
+  }));
+
+  router.delete('/:userName/showFavourites', asyncHandler(async (req, res) => {
+    const favourite = req.body.id;
+    const userName = req.params.userName;
+    const user = await User.findByUserName(userName);
+    if(user.showFavourites.includes(favourite)){
+      const index = user.showFavourites.indexOf(favourite);
+      await user.showFavourites.splice(index, 1);
+      await user.save(); 
+      res.status(201).json(user);
+    } else {
+      res.status(404).json({ code: 404, msg: 'Show is not in favourites' });
     }
   }));
 
