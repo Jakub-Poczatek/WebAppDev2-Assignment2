@@ -5,7 +5,7 @@ Name: Jakub Poczatek
 ## Features.
  
 ### Authentication/Users
-====================
+
 + Login page
   + User must exist in the MongoDB to be logged in.
 + Signup page
@@ -18,7 +18,7 @@ Name: Jakub Poczatek
 + User has the option to sign out
 
 ### Movies/Shows
-============
+
 + Discover Movies Page
   + Movies list is now retrieved from tmdb with Node acting as a middleman.
   + Movie Genre list is now retrieved from tmdb with Node acting as a middleman.
@@ -38,7 +38,7 @@ Name: Jakub Poczatek
   + Show Images are now retrieved from tmdb with Node acting as a middleman.
 
 ### Favourites/Wishlist/Favorite Tv Shows
-=====================================
+
 The 3 types of favourites all implement the same features and will be grouped into a single term of "favourites" to avoid unnecessary text.
 
 + Favourites are now saved to an array inside the user schema in MongoDB. This makes the favourites user specific. 
@@ -47,14 +47,14 @@ The 3 types of favourites all implement the same features and will be grouped in
 + User can write reviews about their favourites (with the exception to wishlist movies due to a lack of logic).
 
 ### Movie/Show Reviews
-==================
+
 + Reviews now have their own schema and are saved to the MongoDB.
 + When a user writes a review, that review gets saved to MongoDB and its mongo ObjectId gets added into the users array of reviews. 
 + The review can then be seen along the other reviews. However, due to the nature of js, the user reviews will only appear after the 2nd time of checking a movies reviews. 
 + The reviews author field is automatically populated with the signed in users username and cannot be changed. 
 
 ### Logging
-=======
+
 + All htmls calls are logged and saved in the log file using Morgan. 
 
 
