@@ -68,6 +68,7 @@ const ShowReviewForm = ({ show, history }) => {
   const context = useContext(AuthContext);
   const [rating, setRating] = useState(3);
   const [open, setOpen] = React.useState(false);
+  const {userName} = useContext(AuthContext);
 
   const handleSnackClose = (event) => {
       setOpen(false);
@@ -120,7 +121,10 @@ const ShowReviewForm = ({ show, history }) => {
           id="author"
           label="Author's name"
           name="authorName"
-          autoFocus
+          value={userName}
+          inputProps = {
+            {readOnly: true,}
+          }
           inputRef={register({ required: "Author name required" })}
         />
         {errors.author && (
@@ -137,6 +141,7 @@ const ShowReviewForm = ({ show, history }) => {
           name="text"
           label="Review text"
           id="content"
+          autoFocus
           multiline
           rows={10}
           inputRef={register({
