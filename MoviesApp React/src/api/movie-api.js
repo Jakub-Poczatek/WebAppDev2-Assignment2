@@ -137,25 +137,23 @@ export const removeShowFavouriteMovie = (userName, id) => {
 //Reviews//
 ///////////
 
-export const addMovieReview = (authorName, text, rating, id) => {
-    console.info("1: " + authorName + "\n2: " +  text + "\n3: " + rating + "\n4: " + id)
+export const addMovieReview = (authorName, text, rating, id, userName) => {
     return fetch(`/api/reviews`, {
         headers: {
             "Content-Type": "application/json"
         },
         method: "post",
-        body: JSON.stringify({authorName: authorName, text: text, rating: rating, movieId: id})
+        body: JSON.stringify({authorName: authorName, text: text, rating: rating, movieId: id, userName: userName})
     }).then(res => res.json());
 } ;
 
-export const addShowReview = (authorName, text, rating, id) => {
-    console.info("1: " + authorName + "\n2: " +  text + "\n3: " + rating + "\n4: " + id)
+export const addShowReview = (authorName, text, rating, id, userName) => {
     return fetch(`/api/reviews/shows`, {
         headers: {
             "Content-Type": "application/json"
         },
         method: "post",
-        body: JSON.stringify({authorName: authorName, text: text, rating: rating, showId: id})
+        body: JSON.stringify({authorName: authorName, text: text, rating: rating, showId: id, userName: userName})
     }).then(res => res.json());
 } 
 

@@ -1,6 +1,7 @@
 import express from "express";
 import movieReview from "./movieReviewModel";
 import showReview from "./showReviewModel";
+import User from "../users/userModel";
 import asyncHandler from "express-async-handler";
 
 const router = express.Router();
@@ -22,7 +23,10 @@ router.post("/", asyncHandler( async (req, res, next) => {
         res.status(401).json({success: false, msg: "Please fill in all the required fields"});
         return next();
     }
-    await movieReview.create(req.body);
+    const review = await movieReview.create(req.body);
+    const user = await User.findByUserName(req.body.userName);
+    await user.reviews.push(review._id);
+    await user.save();
     res.status(201).json({code: 201, msg: "Succesfully added review"});
 }));
 
@@ -32,7 +36,10 @@ router.post("/shows", asyncHandler( async (req, res, next) => {
         res.status(401).json({success: false, msg: "Please fill in all the required fields"});
         return next();
     }
-    await showReview.create(req.body);
+    const review = await showReview.create(req.body);
+    const user = await User.findByUserName(req.body.userName);
+    await user.reviews.push(review._id);
+    await user.save();
     res.status(201).json({code: 201, msg: "Succesfully added review"});
 }));
 

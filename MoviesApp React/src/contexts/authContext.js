@@ -98,13 +98,13 @@ const AuthContextProvider = (props) => {
   const addReview = (review) => {
     setMyReviews({...myReviews, review})
     console.info("1: " + review.authorName + "\n2: " +  review.text + "\n3: " + review.rating + "\n4: " + review.movieId)
-    addMovieReview(review.authorName, review.text, review.rating, review.movieId)
+    addMovieReview(review.authorName, review.text, review.rating, review.movieId, userName)
   };
 
   const addReviewShow = (review) => {
     setMyShowReviews({...myShowReviews, review})
     console.info("1: " + review.authorName + "\n2: " +  review.text + "\n3: " + review.rating + "\n4: " + review.movieId)
-    addShowReview(review.authorName, review.text, review.rating, review.showId)
+    addShowReview(review.authorName, review.text, review.rating, review.showId, userName)
   }
 
   const register = async (username, password) => {

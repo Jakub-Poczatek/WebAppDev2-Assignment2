@@ -9,6 +9,7 @@ const Schema = mongoose.Schema;
     favourites: [{type: Number, ref: 'Movies'}],
     wishlist: [{type: Number, ref: "UpcomingMovies"}],
     showFavourites: [{type: Number, ref: "Shows"}],
+    reviews: [{type: mongoose.Schema.Types.ObjectId, ref: "Reviews", unique: true}]
   });
 
   UserSchema.statics.findByUserName = function (username) {
