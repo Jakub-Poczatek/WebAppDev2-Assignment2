@@ -118,30 +118,77 @@ From here the user can start using the app.
 | ... | ... | ... | ... | ...
 
 ## Security and Authentication
-Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
+To use the app the user has to have an account created. If no accounts exist, the user can create an account with a simple signup form. The web app uses JWT tokens and passport, as such the user only needs to login once until they refresh the app. All routes, except for login and signup, are protected due to the nature of the app being user instance based. These routes include:
+
+/movies/wishlist -> Wishlist Page
+/tv/reviews/form -> Show Review Form Page
+/tv/reviews/:id -> Show Review Page
+/tv/popular -> Popular Tv Shows Page
+/tv/popular/:id -> Show Details Page
+/tv/favorites -> Favourite Shows Page
+/reviews/form -> Movie Review Form Page
+/movies/upcoming -> Upcoming Movies Page
+/movies/reviews/:id -> Movie Review Page
+/movies/favorites -> Favourite Movies Page
+/movies/:id -> Movie Details Page
+/ -> HomePage (Discover Movies Page)
 
 ## Integrating with React App
 
 Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
 
+The React app is fully integrated with the Node.js API. All show/movie related calls are first proxied to the API, and from there send off to the TMDB endpoints. These calls include:
++ movies list
++ upcoming movies list
++ movie details
++ movie genres
++ movie images
++ movie reviews
++ countries list
++ languages list
++ popular shows list
++ shows genres
++ shows images
++ shows reviews
+
+The rest of the calls are handled exclusively by the Node.js API. These calls usually involve: geting from/saving to/deleting from the MongoDB. These calls include:
++ everything to do with users
++ eveything to do with user written reviews
+
+The react app can be viewed in the "MoviesApp React". 
+
+Here is an example of a tmdb method call inside the react app (tmdb.api.js). 
+
 ~~~Javascript
 export const getMovies = () => {
   return fetch(
-     '/api/movies',{headers: {
-       'Authorization': window.localStorage.getItem('token')
+    '/api/movies?page=1', 
+      {headers: {
+        "Authorization": window.localStorage.getItem("token")
+      }
     }
-  }
-  )
-    .then(res => res.json())
-    .then(json => {return json.results;});
+  ).then(res=>res.json());
 };
+~~~
 
+Here is an example of a API handled call inside the react app (movies-api.js).
+
+~~~Javascript
+export const login = (username, password) => {
+    return fetch(`/api/users`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "post",
+        body: JSON.stringify({username: username, password: password})
+    }).then(res => res.json());
+};
 ~~~
 
 ## Extra features
 
-. . Briefly explain any non-standard features, functional or non-functional, developed for the app.  
+All HTML calls are logged and saved in the log.txt file. This is done using Morgan.  
 
 ## Independent learning
 
-. . State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment . .  
+HTML call logging using Morgan. 
