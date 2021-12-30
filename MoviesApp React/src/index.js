@@ -17,11 +17,6 @@ import FavoriteShowsPage from "./pages/favoriteShowsPage";
 import ShowReviewPage from "./pages/showReviewPage";
 import AddShowReviewPage from "./pages/addShowReviewPage";
 import WishlistPage from "./pages/wishlistPage";
-/*import PrivateRoute from "./authentication/privateRoute";
-import authHeader from "./authentication/authHeader";
-import AuthContextProvider from "./authentication/authContext";
-import LoginPage from "./pages/loginPage";
-*/
 import LoginPage from "./pages/loginPage";
 import AuthProvider from "./contexts/authContext";
 import PrivateRoute from "./components/privateRoute/privateRoute";

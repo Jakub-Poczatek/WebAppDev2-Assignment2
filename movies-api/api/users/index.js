@@ -15,23 +15,16 @@ router.get('/', async (req, res) => {
 
 // register
 router.post('/',asyncHandler( async (req, res, next) => {
-  console.info("Regsitering being called");
     if (!req.body.username || !req.body.password) {
-      console.info("Supply username and password");
       res.status(401).json({success: false, msg: 'Please pass username and password.'});
       return next();
     }
     if (req.query.action === 'register') {
-      console.info("I do be registering");
       if(new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/).test(req.body.password)){
-        console.info("Verificaiton passed");
         await User.create(req.body);
-        console.info("Made that bod");
         res.status(201).json({code: 201, msg: 'Successful created new user.'});
-        console.info("Succesfully created user");
       } else {
         res.status(401).json({code: 401, msg: "Invalid password."});
-        console.info("Failed creating a user");
       }
     } else {
       const user = await User.findByUserName(req.body.username);
@@ -66,7 +59,6 @@ router.put('/:id', async (req, res) => {
 //Favourites//
 //////////////
 
-//Add a favourite. No Error Handling Yet. Can add duplicates too!
 router.post('/:userName/favourites', asyncHandler(async (req, res) => {
     const newFavourite = req.body.id;
     const userName = req.params.userName;
