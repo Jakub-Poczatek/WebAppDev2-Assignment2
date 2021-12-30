@@ -7,11 +7,11 @@ Name: Jakub Poczatek
 Authentication/Users
 ====================
 + Login page
-  ++ User must exist in the MongoDB to be logged in.
+  + User must exist in the MongoDB to be logged in.
 + Signup page
-  ++ Username field has to be a unique value 
-  ++ Password field has to conform to the regular expression: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/
-  ++ Repeat password must match password field
+  + Username field has to be a unique value 
+  + Password field has to conform to the regular expression: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/
+  + Repeat password must match password field
 + Users are now permanently saved to MongoDB when registering.
 + All paths except for login and signup are now protected parts requiring a user to be logged in. 
 + User name now appears on the site header
