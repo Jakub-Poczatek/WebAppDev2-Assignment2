@@ -21,8 +21,12 @@ router.post('/',asyncHandler( async (req, res, next) => {
     }
     if (req.query.action === 'register') {
       if(new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/).test(req.body.password)){
-        await User.create(req.body);
-        res.status(201).json({code: 201, msg: 'Successful created new user.'});
+        if(!await User.findByUserName(req.body.username)){
+          await User.create(req.body);
+          res.status(201).json({code: 201, msg: 'Successful created new user.'});
+        } else {
+          res.status(401).json({code: 401, msg: "Username taken."});
+        }
       } else {
         res.status(401).json({code: 401, msg: "Invalid password."});
       }
