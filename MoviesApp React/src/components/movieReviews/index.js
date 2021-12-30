@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   
     useEffect(() => {
 
-      context.getMyMovieReviews(movie.id)
+      context.getMyMovieReviews(movie.id);
 
       getMovieReviews(movie.id).then((reviews) => {
         

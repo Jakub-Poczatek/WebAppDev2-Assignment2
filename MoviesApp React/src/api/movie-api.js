@@ -172,3 +172,19 @@ export const getMovieReviews = (movieId) => {
         throw error;
     });
 }
+
+export const getShowReviews = (showId) => {
+    return fetch(
+        `/api/reviews/shows/${showId}`
+    ).then((response) => {
+        if(!response.ok){
+            throw new Error(response.json().message);
+        }
+        return response.json();
+    })
+    .catch((error) => {
+        throw error;
+    });
+}
+
+

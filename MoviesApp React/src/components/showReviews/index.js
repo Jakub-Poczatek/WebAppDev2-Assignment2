@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useContext, useEffect, useState }  from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import { getShowReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
+import { AuthContext } from "../../contexts/authContext";
 
 const useStyles = makeStyles({
   table: {
@@ -20,10 +21,36 @@ const useStyles = makeStyles({
 export default function ShowReviews({ show }) {
   const classes = useStyles();
   const [reviews, setReviews] = useState([]);
+  const context = useContext(AuthContext);
+  const {specificShowReviews} = useContext(AuthContext);
+  const correctShowReviews = [];
 
   useEffect(() => {
+    
+    context.getMyShowReviews(show.id);
+
     getShowReviews(show.id).then((reviews) => {
-      setReviews(reviews);
+
+      for(let i = 0; i < reviews.length; i++){
+        let element = reviews[i];
+        correctShowReviews.unshift({
+          id: element.id,
+          author: element.author,
+          content: element.content,
+        })
+      }
+
+      for(let i = 0; i < specificShowReviews.length; i++){
+        let element = specificShowReviews[i];
+        correctShowReviews.unshift({
+          id: element._id,
+          author: element.authorName,
+          content: element.text,
+        })
+      }
+
+      setReviews(correctShowReviews);
+
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
