@@ -3,7 +3,7 @@ import { login, signup,
   addFavouriteMovie, getFavouriteMovies, removeFavouriteMovie, 
   addWishlistMovie, getWishlistMovies, removeWishlistMovie,
   addShowFavouriteMovie, getShowFavouriteMovies, removeShowFavouriteMovie, 
-  addMovieReview, addShowReview
+  addMovieReview, addShowReview, getMovieReviews
 } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
@@ -18,6 +18,7 @@ const AuthContextProvider = (props) => {
   const [showFavorites, setShowFavorites] = useState([]);
   const [myReviews, setMyReviews] = useState({});
   const [myShowReviews, setMyShowReviews] = useState({});
+  const [specificMovieReviews, setSpecificMovieReviews] = useState({});
 
   //Function to put JWT token in local storage.
   const setToken = (data) => {
@@ -36,6 +37,10 @@ const AuthContextProvider = (props) => {
       setShowFavorites(await getShowFavouriteMovies(username));
     }
   };
+
+  const getMyMovieReviews = async (movieId) => {
+    setSpecificMovieReviews(await getMovieReviews(movieId));
+  }
 
   const addToFavorites = (movie) => {
     if(!favorites.includes(movie)){
@@ -127,7 +132,10 @@ const AuthContextProvider = (props) => {
         addReview,
         myReviews,
         addReviewShow,
-        myShowReviews
+        myShowReviews,
+        getMyMovieReviews,
+        specificMovieReviews,
+        setSpecificMovieReviews
       }}
     >
       {props.children}

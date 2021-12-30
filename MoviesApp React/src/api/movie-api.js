@@ -158,3 +158,17 @@ export const addShowReview = (authorName, text, rating, id) => {
         body: JSON.stringify({authorName: authorName, text: text, rating: rating, showId: id})
     }).then(res => res.json());
 } 
+
+export const getMovieReviews = (movieId) => {
+    return fetch(
+        `/api/reviews/${movieId}`
+    ).then((response) => {
+        if(!response.ok){
+            throw new Error(response.json().message);
+        }
+        return response.json();
+    })
+    .catch((error) => {
+        throw error;
+    });
+}

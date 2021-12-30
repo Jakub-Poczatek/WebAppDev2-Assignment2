@@ -26,6 +26,13 @@ router.post("/", asyncHandler( async (req, res, next) => {
     res.status(201).json({code: 201, msg: "Succesfully added review"});
 }));
 
+router.get("/:id", async(req, res) => {
+    console.info("I am being called");
+    const id = parseInt(req.params.id);
+    const movieReviews = await movieReview.findByMovieId(id);
+    res.status(200).json(movieReviews);
+});
+
 //Add a review
 router.post("/shows", asyncHandler( async (req, res, next) => {
     if(!req.body.authorName || !req.body.text || !req.body.rating || !req.body.showId){

@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useContext, useEffect, useState }  from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import { getMovieReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
+import { AuthContext } from "../../contexts/authContext";
 
 const useStyles = makeStyles({
     table: {
@@ -20,10 +21,35 @@ const useStyles = makeStyles({
   export default function MovieReviews({ movie }) {
     const classes = useStyles();
     const [reviews, setReviews] = useState([]);
+    const context = useContext(AuthContext);
+    const {specificMovieReviews} = useContext(AuthContext);
+    const correctMovieReviews = [];
   
     useEffect(() => {
+
+      context.getMyMovieReviews(movie.id)
+
       getMovieReviews(movie.id).then((reviews) => {
-        setReviews(reviews);
+        
+        for(let i = 0; i < reviews.length; i++){
+          let element = reviews[i];
+          correctMovieReviews.unshift({
+            id: element.id,
+            author: element.author,
+            content: element.content,
+          })
+        }
+        for(let i = 0; i < specificMovieReviews.length; i++){
+          let element = specificMovieReviews[i];
+          correctMovieReviews.unshift({
+            id: element._id,
+            author: element.authorName,
+            content: element.text,
+          })
+        }
+
+        setReviews(correctMovieReviews);
+        
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
