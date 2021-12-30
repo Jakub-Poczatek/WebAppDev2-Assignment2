@@ -91,17 +91,31 @@ This will launch the React app and should also open the users default browser to
 From here the user can start using the app. 
 
 ## API Design
-Give an overview of your web API design, perhaps similar to the following: 
 
 |  |  GET | POST | PUT | DELETE
 | -- | -- | -- | -- | -- 
-| /api/movies |Gets a list of movies | N/A | N/A |
-| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-| /api/movies/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
+| /api/movies |Gets a list of movies | N/A | N/A | N/A
+| /api/movies/tmdb/upcoming |Gets a list of upcoming movies | N/A | N/A | N/A
+| /api/movies/:id |Get a movie by id | N/A | N/A | N/A
+| /api/genres/movies |Get movie genres | N/A | N/A | N/A
+| /api/movies/:id/images |Get a movies images | N/A | N/A | N/A
+| /api/movies/:id/reviews |Get a movies reviews | N/A | N/A | N/A
+| /api/regionals/countries |Get a list of countries | N/A | N/A | N/A
+| /api/regionals/languages |Get a list of languages | N/A | N/A | N/A
+| /api/shows |Get a list of shows | N/A | N/A | N/A
+| /api/shows/:id |Get a show by id | N/A | N/A | N/A
+| /api/genres/shows |Get show genres | N/A | N/A | N/A
+| /api/shows/:id/images |Get a shows images | N/A | N/A | N/A
+| /api/shows/:id/reviews |Get a shows reviews | N/A | N/A | N/A
+| /api/users |Get the list of users |Add a user | N/A | N/A
+| /api/users/:userName/favourites |Get a users favourites | Add to favourites | N/A | Delete from favourites
+| /api/users/:userName/wishlist |Get a users wishlist |Add to wishlist| N/A | Delete from wishlist
+| /api/users/:userName/showFavourites |Get a users show favourites | Add to show favourites | N/A | Delete from show favourites
+| /api/reviews |Get all movie reviews |Add to movie reviews | N/A | N/A
+| /api/reviews/shows |Get all show reviews | Add to show reviews | N/A | N/A
+| /api/reviews/:id |Get a movies reviews | N/A | N/A | N/A
+| /api/reviews/shows/:id |Get a shows reviews | N/A | N/A | N/A
 | ... | ... | ... | ... | ...
-
-If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
-
 
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.

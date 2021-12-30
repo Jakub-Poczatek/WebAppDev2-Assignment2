@@ -57,6 +57,7 @@ router.get('/:id/reviews', asyncHandler(async (req, res) => {
     }
 }));
 
+/*
 //Post a movie review
 router.post('/:id/reviews', (req, res) => {
     const id = parseInt(req.params.id);
@@ -74,5 +75,6 @@ router.post('/:id/reviews', (req, res) => {
         });
     }
 });
+*/
 
 export default router;

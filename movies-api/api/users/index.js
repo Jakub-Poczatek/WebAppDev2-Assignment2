@@ -46,6 +46,7 @@ router.post('/',asyncHandler( async (req, res, next) => {
       }
   }));
 
+  /*
 // Update a user
 router.put('/:id', async (req, res) => {
     if (req.body._id) delete req.body._id;
@@ -58,6 +59,7 @@ router.put('/:id', async (req, res) => {
         res.status(404).json({ code: 404, msg: 'Unable to Update User' });
     }
 });
+*/
 
 //////////////
 //Favourites//
