@@ -2,7 +2,8 @@ import React, { useState, createContext } from "react";
 import { login, signup, 
   addFavouriteMovie, getFavouriteMovies, removeFavouriteMovie, 
   addWishlistMovie, getWishlistMovies, removeWishlistMovie,
-  addShowFavouriteMovie, getShowFavouriteMovies, removeShowFavouriteMovie 
+  addShowFavouriteMovie, getShowFavouriteMovies, removeShowFavouriteMovie, 
+  addMovieReview, addShowReview
 } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
@@ -15,6 +16,8 @@ const AuthContextProvider = (props) => {
   const [favorites, setFavorites] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [showFavorites, setShowFavorites] = useState([]);
+  const [myReviews, setMyReviews] = useState({});
+  const [myShowReviews, setMyShowReviews] = useState({});
 
   //Function to put JWT token in local storage.
   const setToken = (data) => {
@@ -82,10 +85,22 @@ const AuthContextProvider = (props) => {
     removeShowFavouriteMovie(userName, show.id);
   }
 
+  const addReview = (review) => {
+    setMyReviews({...myReviews, review})
+    console.info("1: " + review.authorName + "\n2: " +  review.text + "\n3: " + review.rating + "\n4: " + review.movieId)
+    addMovieReview(review.authorName, review.text, review.rating, review.movieId)
+  };
+
+  const addReviewShow = (review) => {
+    setMyShowReviews({...myShowReviews, review})
+    console.info("1: " + review.authorName + "\n2: " +  review.text + "\n3: " + review.rating + "\n4: " + review.movieId)
+    addShowReview(review.authorName, review.text, review.rating, review.showId)
+  }
+
   const register = async (username, password) => {
     const result = await signup(username, password);
     console.log(result.code);
-    return (result.code == 201) ? true : false;
+    return (result.code === 201) ? true : false;
   };
 
   const signout = () => {
@@ -108,7 +123,11 @@ const AuthContextProvider = (props) => {
         wishlist,
         addToShowFavorites,
         removeFromShowFavourites,
-        showFavorites
+        showFavorites,
+        addReview,
+        myReviews,
+        addReviewShow,
+        myShowReviews
       }}
     >
       {props.children}

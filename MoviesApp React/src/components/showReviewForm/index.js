@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import useForm from "react-hook-form";
 import { MoviesContext } from "../../contexts/moviesContext";
+import { AuthContext } from "../../contexts/authContext";
 import { withRouter } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 const ShowReviewForm = ({ show, history }) => {
   const classes = useStyles();
   const { register, handleSubmit, errors, reset } = useForm();
-  const context = useContext(MoviesContext);
+  const context = useContext(AuthContext);
   const [rating, setRating] = useState(3);
   const [open, setOpen] = React.useState(false);
 
@@ -79,8 +80,9 @@ const ShowReviewForm = ({ show, history }) => {
 
   const onSubmit = (review) => {
     review.showId = show.id;
-    review.rating = rating;
-    context.addShowReview(show, review);
+    review.rating = ratings.find(element => element.value === rating).label;
+    console.log(review);
+    context.addReviewShow(review);
     setOpen(true);
   };
 
@@ -117,7 +119,7 @@ const ShowReviewForm = ({ show, history }) => {
           required
           id="author"
           label="Author's name"
-          name="author"
+          name="authorName"
           autoFocus
           inputRef={register({ required: "Author name required" })}
         />
@@ -132,7 +134,7 @@ const ShowReviewForm = ({ show, history }) => {
           margin="normal"
           required
           fullWidth
-          name="content"
+          name="text"
           label="Review text"
           id="content"
           multiline
