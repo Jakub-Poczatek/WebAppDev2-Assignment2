@@ -9,6 +9,9 @@ import regionalsRouter from "./api/regionals";
 import showsRouter from "./api/shows";
 import reviewRouter from "./api/reviews";
 import passport from "./authenticate";
+import morgan from "morgan";
+import fs from "fs";
+import path from "path";
 
 dotenv.config();
 
@@ -22,8 +25,11 @@ const errHandler = (err, req, res, next) => {
 };
 
 const app = express();
-
 const port = process.env.PORT;
+
+const appLogStream = fs.createWriteStream(path.join(__dirname, 'log'), { flags: 'a' });
+morgan.token("body", (req) => JSON.stringify(req.body));
+app.use(morgan(":method :url :status :res[content-length] - :response-time ms :body", {stream: appLogStream}));
 
 app.use(passport.initialize());
 app.use(express.json());

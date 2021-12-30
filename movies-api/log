@@ -1,0 +1,2 @@
+GET /api/users 200 268 - 18.763 ms {"username":"JPoczatek","password":"GoodPass123"}
+GET /api/movies 200 13087 - 207.797 ms {"username":"JPoczatek","password":"GoodPass123"}
