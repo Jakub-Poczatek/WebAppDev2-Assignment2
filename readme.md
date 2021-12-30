@@ -120,18 +120,18 @@ From here the user can start using the app.
 ## Security and Authentication
 To use the app the user has to have an account created. If no accounts exist, the user can create an account with a simple signup form. The web app uses JWT tokens and passport, as such the user only needs to login once until they refresh the app. All routes, except for login and signup, are protected due to the nature of the app being user instance based. These routes include:
 
-/movies/wishlist -> Wishlist Page
-/tv/reviews/form -> Show Review Form Page
-/tv/reviews/:id -> Show Review Page
-/tv/popular -> Popular Tv Shows Page
-/tv/popular/:id -> Show Details Page
-/tv/favorites -> Favourite Shows Page
-/reviews/form -> Movie Review Form Page
-/movies/upcoming -> Upcoming Movies Page
-/movies/reviews/:id -> Movie Review Page
-/movies/favorites -> Favourite Movies Page
-/movies/:id -> Movie Details Page
-/ -> HomePage (Discover Movies Page)
++ /movies/wishlist -> Wishlist Page
++ /tv/reviews/form -> Show Review Form Page
++ /tv/reviews/:id -> Show Review Page
++ /tv/popular -> Popular Tv Shows Page
++ /tv/popular/:id -> Show Details Page
++ /tv/favorites -> Favourite Shows Page
++ /reviews/form -> Movie Review Form Page
++ /movies/upcoming -> Upcoming Movies Page
++ /movies/reviews/:id -> Movie Review Page
++ /movies/favorites -> Favourite Movies Page
++ /movies/:id -> Movie Details Page
++ / -> HomePage (Discover Movies Page)
 
 ## Integrating with React App
 
