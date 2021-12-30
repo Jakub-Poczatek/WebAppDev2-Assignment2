@@ -134,10 +134,8 @@ To use the app the user has to have an account created. If no accounts exist, th
 + / -> HomePage (Discover Movies Page)
 
 ## Integrating with React App
-
-Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
-
 The React app is fully integrated with the Node.js API. All show/movie related calls are first proxied to the API, and from there send off to the TMDB endpoints. These calls include:
+
 + movies list
 + upcoming movies list
 + movie details
