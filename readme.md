@@ -58,17 +58,17 @@ The 3 types of favourites all implement the same features and will be grouped in
 + All htmls calls are logged and saved in the log file using Morgan. 
 
 
-## Installation Requirements
+## Installation Requirements/API Configuration
 
 The user will need to download the zip file of the repo. Uncompress it into a folder and open the new folder using their preferred text editor. The user will also need a current version of mongo installed. 
 After opening the folder in the chosen editor, the user will need to create an .env file with the following structure.
 
 + NODE_ENV=development
 + PORT=8080
-+ HOST=localhost
-+ MONGO_DB=mongodb://localhost:27017/movies_db
++ HOST=
++ MONGO_DB=*users MongoURL*
 + SEED_DB=True
-+ SECRET=ilikecake
++ SECRET=*users JWTSecret*
 + TMDB_KEY=*users tmdb key*
 
 After creating the .env file the user should open a new terminal inside the "movies-api" folder and input the following commands. 
@@ -89,21 +89,6 @@ npm start
 This will launch the React app and should also open the users default browser to port: 3000. 
 
 From here the user can start using the app. 
-
-
-## API Configuration
-Describe any configuration that needs to take place before running the API. For example, creating an ``.env`` and what variables to put in it. Give an example of how this might be structured/done.
-REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB, just placeholders as indicated below:
-
-```bat
-NODE_ENV=development
-PORT=8080
-HOST=
-mongoDB=YourMongoURL
-seedDb=true
-secret=YourJWTSecret
-```
-
 
 ## API Design
 Give an overview of your web API design, perhaps similar to the following: 
