@@ -19,43 +19,43 @@ Authentication/Users
 
 Movies/Shows
 ============
-+Discover Movies Page
-    ++Movies list is now retrieved from tmdb with Node acting as a middleman.
-    ++Movie Genre list is now retrieved from tmdb with Node acting as a middleman.
-    ++Languages list is now retrieved from tmdb with Node acting as a middleman.
-    ++Movie Images are now retrieved from tmdb with Node acting as a middleman.
++ Discover Movies Page
+  + Movies list is now retrieved from tmdb with Node acting as a middleman.
+  + Movie Genre list is now retrieved from tmdb with Node acting as a middleman.
+  + Languages list is now retrieved from tmdb with Node acting as a middleman.
+  + Movie Images are now retrieved from tmdb with Node acting as a middleman.
 
-+Upcoming Movies Page
-    ++Movies list is now retrieved from tmdb with Node acting as a middleman.
-    ++Movie Genre list is now retrieved from tmdb with Node acting as a middleman.
-    ++Languages list is now retrieved from tmdb with Node acting as a middleman.
-    ++Movie Images are now retrieved from tmdb with Node acting as a middleman.
++ Upcoming Movies Page
+  + Movies list is now retrieved from tmdb with Node acting as a middleman.
+  + Movie Genre list is now retrieved from tmdb with Node acting as a middleman.
+  + Languages list is now retrieved from tmdb with Node acting as a middleman.
+  + Movie Images are now retrieved from tmdb with Node acting as a middleman.
 
-+Popular Tv Shows
-    ++Shows list is now retrieved from tmdb with Noda acting as a middleman.
-    ++Shows Genre list is now retrieved from tmdb with Node acting as a middleman.
-    ++Countries list is now retrieved from tmdb with Node acting as a middleman.
-    ++Show Images are now retrieved from tmdb with Node acting as a middleman.
++ Popular Tv Shows
+  + Shows list is now retrieved from tmdb with Noda acting as a middleman.
+  + Shows Genre list is now retrieved from tmdb with Node acting as a middleman.
+  + Countries list is now retrieved from tmdb with Node acting as a middleman.
+  + Show Images are now retrieved from tmdb with Node acting as a middleman.
 
 Favourites/Wishlist/Favorite Tv Shows
 =====================================
 The 3 types of favourites all implement the same features and will be grouped into a single term of "favourites" to avoid unnecessary text.
 
-+Favourites are now saved to an array inside the user schema in MongoDB. This makes the favourites user specific. 
-+Favourited movies/shows will show up with a hearth/playlistCheck icon when the user loads the webpage, if those movies already exist inside the users favourites arrays. 
-+Favourites can be deleted and will be removed from both the webpage and the MongoDB. 
-+User can write reviews about their favourites (with the exception to wishlist movies due to a lack of logic).
++ Favourites are now saved to an array inside the user schema in MongoDB. This makes the favourites user specific. 
++ Favourited movies/shows will show up with a hearth/playlistCheck icon when the user loads the webpage, if those movies already exist inside the users favourites arrays. 
++ Favourites can be deleted and will be removed from both the webpage and the MongoDB. 
++ User can write reviews about their favourites (with the exception to wishlist movies due to a lack of logic).
 
 Movie/Show Reviews
 ==================
-+Reviews now have their own schema and are saved to the MongoDB.
-+When a user writes a review, that review gets saved to MongoDB and its mongo ObjectId gets added into the users array of reviews. 
-+The review can then be seen along the other reviews. However, due to the nature of js, the user reviews will only appear after the 2nd time of checking a movies reviews. 
-+The reviews author field is automatically populated with the signed in users username and cannot be changed. 
++ Reviews now have their own schema and are saved to the MongoDB.
++ When a user writes a review, that review gets saved to MongoDB and its mongo ObjectId gets added into the users array of reviews. 
++ The review can then be seen along the other reviews. However, due to the nature of js, the user reviews will only appear after the 2nd time of checking a movies reviews. 
++ The reviews author field is automatically populated with the signed in users username and cannot be changed. 
 
 Logging
 =======
-+All htmls calls are logged and saved in the log file using Morgan. 
++ All htmls calls are logged and saved in the log file using Morgan. 
 
 
 ## Installation Requirements
