@@ -63,13 +63,13 @@ The 3 types of favourites all implement the same features and will be grouped in
 The user will need to download the zip file of the repo. Uncompress it into a folder and open the new folder using their preferred text editor. The user will also need a current version of mongo installed. 
 After opening the folder in the chosen editor, the user will need to create an .env file with the following structure.
 
-NODE_ENV=development
-PORT=8080
-HOST=localhost
-MONGO_DB=mongodb://localhost:27017/movies_db
-SEED_DB=True
-SECRET=ilikecake
-TMDB_KEY=*users tmdb key*
++ NODE_ENV=development
++ PORT=8080
++ HOST=localhost
++ MONGO_DB=mongodb://localhost:27017/movies_db
++ SEED_DB=True
++ SECRET=ilikecake
++ TMDB_KEY=*users tmdb key*
 
 After creating the .env file the user should open a new terminal inside the "movies-api" folder and input the following commands. 
 
